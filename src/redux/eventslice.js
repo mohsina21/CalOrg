@@ -4,7 +4,7 @@ import axios from "axios";
 // 🔄 Async Thunks
 export const fetchEvents = createAsyncThunk("events/fetchEvents", async () => {
   try {
-    const response = await axios.get("/api/events");
+    const response = await axios.get("https://calorg.onrender.com/api/events");
     console.log("Fetched events from API:", response.data); // Debug log
     return response.data;
   } catch (error) {
