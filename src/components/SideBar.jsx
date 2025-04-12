@@ -68,10 +68,18 @@ const SideBar = () => {
 
   return (
     <>
-      {/* Sidebar Toggle Button */}
+      {/* Overlay for mobile */}
+      {sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30 md:hidden"
+        />
+      )}
+
+      {/* Toggle Button */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="toggle-btn md:hidden"
+        className="fixed top-4 left-4 z-50 bg-indigo-600 text-white p-2 rounded-md shadow-md md:hidden"
       >
         {sidebarOpen ? <ChevronUp /> : <ChevronDown />}
       </button>
