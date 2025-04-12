@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CalendarView from "./components/CalendarView";
 import EventModal from "./components/EventModal";
 import Header from "./components/Header";
-import Sidebar from "./components/Sidebar"; 
+import SideBar from "./components/Sidebar";
 
 const App = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -35,7 +35,7 @@ const App = () => {
 
       <div className="flex flex-1 overflow-hidden">
         
-        <Sidebar />
+        <SideBar />
 
         <main className="flex-1 overflow-y-auto bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 p-2 sm:p-4">
         <CalendarView

@@ -15,7 +15,7 @@ const mockGoals = [
   { id: "health", name: "Health", color: "green" },
 ];
 
-const Sidebar = () => {
+const SideBar = () => {
   const [selectedGoal, setSelectedGoal] = useState(null);
   const [tasks, setTasks] = useState({
     learn: [
@@ -177,4 +177,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default SideBar;
