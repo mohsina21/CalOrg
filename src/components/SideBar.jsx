@@ -68,22 +68,21 @@ const SideBar = () => {
 
   return (
     <>
-      
+      {/* Sidebar Toggle Button */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="md:hidden p-2 m-2 rounded-md text-white bg-indigo-600 hover:bg-indigo-700 fixed z-50"
+        className="toggle-btn md:hidden"
       >
         {sidebarOpen ? <ChevronUp /> : <ChevronDown />}
       </button>
 
+      {/* Sidebar */}
       <div
-        className={`fixed z-40 md:relative transition-transform duration-300 transform ${
+        className={`sidebar fixed z-40 md:relative transition-transform duration-300 transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        } bg-gray-50 dark:bg-gray-800 border-r dark:border-gray-700 md:w-64 w-4/5 p-4 h-screen overflow-y-auto`}
+        } md:w-64 w-4/5 p-4 h-screen overflow-y-auto bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100`}
       >
-        <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
-          Goals
-        </h2>
+        <h2 className="text-xl font-semibold mb-4">Goals</h2>
         <ul className="space-y-2 mb-4">
           {mockGoals.map((goal) => (
             <li
@@ -100,9 +99,7 @@ const SideBar = () => {
 
         {selectedGoal && (
           <>
-            <h3 className="text-lg font-medium text-gray-800 dark:text-white">
-              Tasks for {mockGoals.find((g) => g.id === selectedGoal).name}
-            </h3>
+            <h3 className="text-lg font-medium">Tasks for {selectedGoal}</h3>
             <ul className="mt-3 space-y-2">
               {tasks[selectedGoal].map((task, index) => (
                 <li

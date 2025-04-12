@@ -15,6 +15,12 @@ export default {
         primary: "#4f46e5", // Indigo-600
         secondary: "#6366f1", // Indigo-500
       },
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+      },
     },
   },
   plugins: [],
