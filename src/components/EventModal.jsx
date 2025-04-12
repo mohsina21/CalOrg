@@ -23,7 +23,7 @@ const EventModal = ({ isOpen, onClose, onSave, initialData }) => {
 
   const dispatch = useDispatch();
 
-  // Populate form with initial data when editing
+  
   useEffect(() => {
     if (initialData) {
       setTitle(initialData.title || "");
@@ -37,7 +37,7 @@ const EventModal = ({ isOpen, onClose, onSave, initialData }) => {
     e.preventDefault();
 
     const newEvent = {
-      id: initialData?.id || undefined, // include ID if editing
+      id: initialData?.id || undefined, 
       title,
       category,
       start: new Date(start),
@@ -45,15 +45,15 @@ const EventModal = ({ isOpen, onClose, onSave, initialData }) => {
       color: categoryColorMap[category] || "gray",
     };
 
-    dispatch(createEventAsync(newEvent)); // Whether add or edit
+    dispatch(createEventAsync(newEvent));
     onClose();
   };
 
   const handleDelete = () => {
     if (initialData?.id) {
-      dispatch(deleteEventAsync(initialData.id)); // Dispatch delete thunk
+      dispatch(deleteEventAsync(initialData.id)); 
     }
-    onClose(); // Close the modal
+    onClose(); 
   };
 
   if (!isOpen) return null;

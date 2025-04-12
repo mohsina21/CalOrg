@@ -68,7 +68,7 @@ const Sidebar = () => {
 
   return (
     <>
-      {/* Mobile Toggle Button */}
+      
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
         className="md:hidden p-2 m-2 rounded-md text-white bg-indigo-600 hover:bg-indigo-700 fixed z-50"
@@ -76,7 +76,6 @@ const Sidebar = () => {
         {sidebarOpen ? <ChevronUp /> : <ChevronDown />}
       </button>
 
-      {/* Sidebar Content */}
       <div
         className={`fixed z-40 md:relative transition-transform duration-300 transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"

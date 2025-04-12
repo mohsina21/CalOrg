@@ -97,7 +97,7 @@ const CalendarView = ({ onSlotSelect, onEventSelect }) => {
             ) {
               return {
                 style: {
-                  backgroundColor: "grey", // Light pink background for the current day
+                  backgroundColor: "grey", 
                 },
               };
             }
