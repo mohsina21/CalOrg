@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { createEventAsync, deleteEventAsync } from "../redux/eventslice"; // make sure delete is defined
+import { createEventAsync, deleteEventAsync } from "../redux/eventslice";
+import ConfirmationModal from "./ConfirmationModal";
 
 const categoryColorMap = {
   exercise: "red",
@@ -18,19 +19,17 @@ const EventModal = ({ isOpen, onClose, onSave, initialData }) => {
   const [category, setCategory] = useState("work");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+
   const dispatch = useDispatch();
 
+  // Populate form with initial data when editing
   useEffect(() => {
     if (initialData) {
       setTitle(initialData.title || "");
       setCategory(initialData.category || "work");
-
-      if (initialData.start) {
-        setStart(new Date(initialData.start).toISOString().slice(0, 16));
-      }
-      if (initialData.end) {
-        setEnd(new Date(initialData.end).toISOString().slice(0, 16));
-      }
+      setStart(initialData.start ? new Date(initialData.start).toISOString().slice(0, 16) : "");
+      setEnd(initialData.end ? new Date(initialData.end).toISOString().slice(0, 16) : "");
     }
   }, [initialData]);
 
@@ -38,15 +37,23 @@ const EventModal = ({ isOpen, onClose, onSave, initialData }) => {
     e.preventDefault();
 
     const newEvent = {
+      id: initialData?.id || undefined, // include ID if editing
       title,
       category,
       start: new Date(start),
       end: new Date(end),
       color: categoryColorMap[category] || "gray",
     };
-    
-    dispatch(createEventAsync(newEvent));
+
+    dispatch(createEventAsync(newEvent)); // Whether add or edit
     onClose();
+  };
+
+  const handleDelete = () => {
+    if (initialData?.id) {
+      dispatch(deleteEventAsync(initialData.id)); // Dispatch delete thunk
+    }
+    onClose(); // Close the modal
   };
 
   if (!isOpen) return null;
@@ -55,8 +62,9 @@ const EventModal = ({ isOpen, onClose, onSave, initialData }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl shadow-xl w-[90%] max-w-md p-6 space-y-4">
         <h3 className="text-xl font-bold mb-2">
-          {initialData?._id ? "Edit Event" : "Add Event"}
+          {initialData?.id ? "Edit Event" : "Add Event"}
         </h3>
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-black dark:text-white"
@@ -122,16 +130,11 @@ const EventModal = ({ isOpen, onClose, onSave, initialData }) => {
               </button>
             </div>
 
-            {initialData?._id && (
+            {initialData?.id && (
               <button
                 type="button"
+                onClick={() => setShowDeleteConfirmation(true)}
                 className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg"
-                onClick={() => {
-                  if (window.confirm("Delete this event?")) {
-                    dispatch(deleteEventAsync(initialData._id));
-                    onClose();
-                  }
-                }}
               >
                 Delete
               </button>
@@ -139,6 +142,13 @@ const EventModal = ({ isOpen, onClose, onSave, initialData }) => {
           </div>
         </form>
       </div>
+
+      <ConfirmationModal
+        isOpen={showDeleteConfirmation}
+        onClose={() => setShowDeleteConfirmation(false)}
+        onConfirm={handleDelete}
+        message="Are you sure you want to delete this event?"
+      />
     </div>
   );
 };

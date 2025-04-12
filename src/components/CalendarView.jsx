@@ -56,7 +56,8 @@ const CalendarView = ({ onSlotSelect, onEventSelect }) => {
 
   return (
     <div className="p-4 h-full w-full">
-      <div className="rounded-2xl shadow-lg overflow-hidden bg-white dark:bg-gray-900 h-[80vh] sm:h-[85vh]">
+      <div className="shadow-lg bg-white dark:bg-gray-900 h-[80vh] sm:h-[85vh]">
+
         <DnDCalendar
           localizer={localizer}
           events={formattedEvents}
