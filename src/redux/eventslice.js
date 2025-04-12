@@ -15,7 +15,7 @@ export const fetchEvents = createAsyncThunk("events/fetchEvents", async () => {
 
 
 export const createEventAsync = createAsyncThunk("events/createEvent", async (eventData) => {
-  const res = await axios.post("http://localhost:5000/api/events", eventData);
+  const res = await axios.post("https://calorg.onrender.com/api/events", eventData);
   return res.data;
 });
 
@@ -23,7 +23,7 @@ export const updateEventAsync = createAsyncThunk(
   "events/updateEvent",
   async (updatedEvent) => {
     const res = await axios.put(
-      `http://localhost:5000/api/events/${updatedEvent._id}`,
+      `https://calorg.onrender.com/api/events/${updatedEvent._id}`,
       updatedEvent
     );
     return res.data; // Return the updated event data
@@ -31,7 +31,7 @@ export const updateEventAsync = createAsyncThunk(
 );
 
 export const deleteEventAsync = createAsyncThunk("events/deleteEvent", async (id) => {
-  await axios.delete(`http://localhost:5000/api/events/${id}`);
+  await axios.delete(`https://calorg.onrender.com/api/events/${id}`);
   return id;
 });
 
