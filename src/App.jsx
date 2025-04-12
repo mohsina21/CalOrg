@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CalendarView from "./components/CalendarView";
 import EventModal from "./components/EventModal";
 import Header from "./components/Header";
-import SideBar from "./components/Sidebar";
+import SideBar from "./components/SideBar";
 
 const App = () => {
   const [modalOpen, setModalOpen] = useState(false);
